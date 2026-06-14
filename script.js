@@ -47,12 +47,16 @@ const countdown = setInterval(() => {
 
 }, 1000);
 
+
 /* -------------------------
-   DESKTOP DRAG (OPTIONAL)
+   DESKTOP DRAG FIX
 ------------------------- */
 milkshake.addEventListener("dragstart", (event) => {
+
     if (gameOver) return;
+
     event.dataTransfer.setData("text/plain", "milkshake");
+    event.dataTransfer.effectAllowed = "move";
 });
 
 character.addEventListener("dragover", (event) => {
@@ -61,9 +65,11 @@ character.addEventListener("dragover", (event) => {
 
 character.addEventListener("drop", (event) => {
     event.preventDefault();
+
+    if (gameOver) return;
+
     hit();
 });
-
 /* -------------------------
    MOBILE TAP SYSTEM
 ------------------------- */
