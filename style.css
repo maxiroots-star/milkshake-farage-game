@@ -1,7 +1,8 @@
 body{
+    margin:0;
+    padding:0;
     text-align:center;
     font-family:Arial;
-    margin:0;
 
     background-image:url("images/background.jpg");
     background-size:cover;
@@ -9,30 +10,39 @@ body{
     min-height:100vh;
 }
 
+/* TITLE */
 h1{
+    color:white;
+    text-shadow:2px 2px 4px black;
+    margin-top:10px;
+}
+
+/* TIMER */
+#timer{
+    font-size:42px;
+    font-weight:bold;
     color:white;
     text-shadow:2px 2px 4px black;
 }
 
-#timer{
-    font-size:40px;
-    font-weight:bold;
-    color:white;
-}
-
+/* SCORE */
 #score{
     font-size:28px;
     font-weight:bold;
     color:white;
+    text-shadow:2px 2px 4px black;
     margin-bottom:10px;
 }
 
+/* GAME AREA (FIXED MOBILE LAYOUT) */
 #gameArea{
     width:95vw;
     max-width:700px;
-    height:450px;
+
+    height:60vh;   /* IMPORTANT FIX */
 
     margin:auto;
+
     position:relative;
 
     border:3px solid black;
@@ -40,25 +50,35 @@ h1{
 
     background-image:url("images/background.jpg");
     background-size:cover;
+    background-position:center;
 
     overflow:hidden;
+
+    touch-action:manipulation; /* IMPORTANT for mobile clicks */
 }
 
+/* CHARACTER */
 #character{
-    width:160px;
+    width:140px;   /* responsive smaller size */
+
     position:absolute;
+
     top:120px;
     left:250px;
 
     user-select:none;
     -webkit-user-drag:none;
+
+    touch-action:manipulation;
 }
 
+/* MILKSHAKE */
 #milkshake{
-    width:90px;
+    width:85px;
+
     position:absolute;
-    bottom:20px;
-    left:20px;
+    bottom:15px;
+    left:15px;
 
     cursor:pointer;
 
@@ -68,18 +88,42 @@ h1{
     transition:transform 0.2s;
 }
 
+/* SPLASH */
 #splash{
     position:absolute;
-    width:140px;
+    width:120px;
 
     display:none;
 
     pointer-events:none;
+
     z-index:999;
 }
 
+/* MESSAGE */
 #message{
-    font-size:22px;
+    font-size:20px;
     color:white;
     text-shadow:2px 2px 4px black;
+    margin-top:10px;
+}
+
+/* MOBILE TWEAKS */
+@media (max-width:600px){
+
+    #character{
+        width:120px;
+    }
+
+    #milkshake{
+        width:75px;
+    }
+
+    #timer{
+        font-size:36px;
+    }
+
+    #score{
+        font-size:24px;
+    }
 }
