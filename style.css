@@ -8,7 +8,7 @@ html, body{
     background:black;
 }
 
-/* TOP UI */
+/* UI */
 #ui{
     text-align:center;
 }
@@ -23,20 +23,16 @@ h1{
     font-size:38px;
     font-weight:bold;
     color:white;
-    text-shadow:2px 2px 4px black;
 }
 
 #score{
     font-size:26px;
     color:white;
-    text-shadow:2px 2px 4px black;
-    margin-bottom:5px;
 }
 
-/* GAME AREA (FULL SCREEN FIXED) */
+/* GAME AREA */
 #gameArea{
     position:absolute;
-
     top:120px;
     left:0;
 
@@ -50,13 +46,11 @@ h1{
     overflow:hidden;
 }
 
-/* ⭐ BIGGER CHARACTER HERE */
+/* CHARACTER */
 #character{
-    width:240px;   /* 👈 increased size */
+    width:180px;
     position:absolute;
-
     user-select:none;
-    -webkit-user-drag:none;
 }
 
 /* MILKSHAKE */
@@ -65,18 +59,14 @@ h1{
     position:absolute;
     bottom:15px;
     left:15px;
-
-    user-select:none;
-    -webkit-user-drag:none;
 }
 
 /* SPLASH */
 #splash{
+    width:140px;
     position:absolute;
-    width:150px;
     display:none;
     pointer-events:none;
-    z-index:999;
 }
 
 /* MESSAGE */
@@ -84,30 +74,6 @@ h1{
     position:absolute;
     bottom:5px;
     width:100%;
-
     text-align:center;
-
-    font-size:18px;
     color:white;
-    text-shadow:2px 2px 4px black;
-}
-
-/* MOBILE ADJUSTMENTS */
-@media (max-width:600px){
-
-    #character{
-        width:200px; /* slightly smaller on small phones */
-    }
-
-    #milkshake{
-        width:75px;
-    }
-
-    #timer{
-        font-size:32px;
-    }
-
-    #score{
-        font-size:22px;
-    }
 }
