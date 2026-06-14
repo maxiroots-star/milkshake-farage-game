@@ -20,6 +20,17 @@ const countdown = setInterval(() => {
         clearInterval(countdown);
 
         gameOver = true;
+        setInterval(() => {
+
+    if(gameOver) return;
+
+    const x = Math.random() * 400;
+    const y = Math.random() * 200;
+
+    character.style.left = x + "px";
+    character.style.top = y + "px";
+
+}, 1000);
 
         message.textContent =
         "Game Over! Score: " + score;
