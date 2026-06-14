@@ -2,6 +2,7 @@ const character = document.getElementById("character");
 const milkshake = document.getElementById("milkshake");
 const message = document.getElementById("message");
 const timer = document.getElementById("timer");
+const scoreDisplay = document.getElementById("score");
 
 let score = 0;
 let seconds = 30;
@@ -9,6 +10,20 @@ let gameOver = false;
 
 milkshake.draggable = true;
 
+// Move the character every second
+const moveCharacter = setInterval(() => {
+
+    if (gameOver) return;
+
+    const x = Math.random() * 350;
+    const y = Math.random() * 180;
+
+    character.style.left = x + "px";
+    character.style.top = y + "px";
+
+}, 1000);
+
+// Countdown timer
 const countdown = setInterval(() => {
 
     seconds--;
@@ -17,40 +32,47 @@ const countdown = setInterval(() => {
 
     if (seconds <= 0) {
 
-        clearInterval(countdown);
-
         gameOver = true;
-        setInterval(() => {
 
-    if(gameOver) return;
+        clearInterval(countdown);
+        clearInterval(moveCharacter);
 
-    const x = Math.random() * 400;
-    const y = Math.random() * 200;
+        if (score < 10) {
 
-    character.style.left = x + "px";
-    character.style.top = y + "px";
+            message.textContent =
+            "Needs more milkshake! Final Score: " + score;
 
-}, 1000);
+        } else if (score < 20) {
 
-        message.textContent =
-        "Game Over! Score: " + score;
+            message.textContent =
+            "Nice work! Final Score: " + score;
+
+        } else {
+
+            message.textContent =
+            "Milkshake Legend! Final Score: " + score;
+
+        }
 
     }
 
 }, 1000);
 
+// Start dragging
 milkshake.addEventListener("dragstart", (event) => {
 
     event.dataTransfer.setData("text", "milkshake");
 
 });
 
+// Allow dropping onto character
 character.addEventListener("dragover", (event) => {
 
     event.preventDefault();
 
 });
 
+// Character gets hit
 character.addEventListener("drop", (event) => {
 
     event.preventDefault();
@@ -59,16 +81,17 @@ character.addEventListener("drop", (event) => {
 
     score++;
 
-    character.src =
-    "images/crying-character.png";
+    if (scoreDisplay) {
+        scoreDisplay.textContent = "Score: " + score;
+    }
 
-    message.textContent =
-    "Nice one! Score: " + score;
+    character.src = "images/crying-character.png";
+
+    message.textContent = "Nice one!";
 
     setTimeout(() => {
 
-        character.src =
-        "images/character.png";
+        character.src = "images/character.png";
 
     }, 500);
 
