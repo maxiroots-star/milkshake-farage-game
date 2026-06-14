@@ -1,65 +1,96 @@
-body{
-    text-align:center;
-    font-family:Arial;
+const character = document.getElementById("character");
+const milkshake = document.getElementById("milkshake");
+const splash = document.getElementById("splash");
 
-    background-image:url("images/background.jpg");
-    background-size:cover;
-    background-position:center;
-    min-height:100vh;
-}
+const message = document.getElementById("message");
+const timer = document.getElementById("timer");
+const scoreDisplay = document.getElementById("score");
 
-#timer{
-    font-size:40px;
-    font-weight:bold;
-}
+let score = 0;
+let seconds = 30;
+let gameOver = false;
 
-#score{
-    font-size:30px;
-    font-weight:bold;
-    margin-bottom:10px;
-}
+milkshake.draggable = true;
 
-#gameArea{
-    width:700px;
-    height:450px;
+/* ----------------------------
+   MOVE CHARACTER
+---------------------------- */
+const moveCharacter = setInterval(() => {
 
-    margin:auto;
-    position:relative;
+    if (gameOver) return;
 
-    border:3px solid black;
-    border-radius:10px;
+    const x = Math.random() * 450;
+    const y = Math.random() * 250;
 
-    background-image:url("images/background.jpg");
-    background-size:cover;
-    background-position:center;
+    character.style.left = x + "px";
+    character.style.top = y + "px";
 
-    overflow:hidden;
-}
+}, 1000);
 
-#character{
-    width:180px;
-    position:absolute;
-    top:120px;
-    left:250px;
-}
+/* ----------------------------
+   TIMER
+---------------------------- */
+const countdown = setInterval(() => {
 
-#milkshake{
-    width:100px;
-    position:absolute;
-    bottom:20px;
-    left:20px;
-    cursor:grab;
-}
+    seconds--;
+    timer.textContent = seconds;
 
-#message{
-    font-size:24px;
-    margin-top:15px;
-}
+    if (seconds <= 0) {
 
-#splash{
-    position:absolute;
-    width:150px;
-    display:none;
-    pointer-events:none;
-    z-index:999;
-}
+        gameOver = true;
+
+        clearInterval(countdown);
+        clearInterval(moveCharacter);
+
+        if (score < 10) {
+            message.textContent = "Needs more milkshakes! Score: " + score;
+        } else if (score < 20) {
+            message.textContent = "Nice job! Score: " + score;
+        } else {
+            message.textContent = "Milkshake legend! Score: " + score;
+        }
+    }
+
+}, 1000);
+
+/* ----------------------------
+   DRAG START
+---------------------------- */
+milkshake.addEventListener("dragstart", (event) => {
+    event.dataTransfer.setData("text", "milkshake");
+});
+
+/* ----------------------------
+   DROP AREA
+---------------------------- */
+character.addEventListener("dragover", (event) => {
+    event.preventDefault();
+});
+
+character.addEventListener("drop", (event) => {
+
+    event.preventDefault();
+
+    if (gameOver) return;
+
+    score++;
+    scoreDisplay.textContent = "Score: " + score;
+
+    // Cry
+    character.src = "images/crying-character.png";
+
+    // Splash position
+    splash.style.display = "block";
+    splash.style.left = character.style.left;
+    splash.style.top = character.style.top;
+
+    message.textContent = "Nice one!";
+
+    setTimeout(() => {
+
+        character.src = "images/character.png";
+        splash.style.display = "none";
+
+    }, 500);
+
+});
