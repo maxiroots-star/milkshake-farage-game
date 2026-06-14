@@ -1,41 +1,64 @@
-const character =
-document.getElementById("character");
+const character = document.getElementById("character");
+const milkshake = document.getElementById("milkshake");
+const message = document.getElementById("message");
+const timer = document.getElementById("timer");
 
-const milkshake =
-document.getElementById("milkshake");
-
-const message =
-document.getElementById("message");
-
-const timer =
-document.getElementById("timer");
-
+let score = 0;
 let seconds = 30;
+let gameOver = false;
 
-const countdown =
-setInterval(() => {
+milkshake.draggable = true;
 
-seconds--;
+const countdown = setInterval(() => {
 
-timer.textContent = seconds;
+    seconds--;
 
-if(seconds <= 0){
+    timer.textContent = seconds;
 
-clearInterval(countdown);
+    if (seconds <= 0) {
 
-message.textContent =
-"Game Over";
+        clearInterval(countdown);
 
-}
+        gameOver = true;
 
-},1000);
+        message.textContent =
+        "Game Over! Score: " + score;
 
-milkshake.addEventListener("click",()=>{
+    }
 
-character.src =
-"images/crying-character.png";
+}, 1000);
 
-message.textContent =
-"😭 Character crying!";
+milkshake.addEventListener("dragstart", (event) => {
+
+    event.dataTransfer.setData("text", "milkshake");
+
+});
+
+character.addEventListener("dragover", (event) => {
+
+    event.preventDefault();
+
+});
+
+character.addEventListener("drop", (event) => {
+
+    event.preventDefault();
+
+    if (gameOver) return;
+
+    score++;
+
+    character.src =
+    "images/crying-character.png";
+
+    message.textContent =
+    "Nice one! Score: " + score;
+
+    setTimeout(() => {
+
+        character.src =
+        "images/character.png";
+
+    }, 500);
 
 });
