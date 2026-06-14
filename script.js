@@ -15,29 +15,39 @@ let gameOver = false;
 let milkshakeSelected = false;
 let musicStarted = false;
 
-/* ---------------- TIMER ---------------- */
-function startTimer() {
+/* ---------------- MUSIC SAFE START ---------------- */
+function startMusic() {
+    if (musicStarted) return;
 
-    const countdown = setInterval(() => {
+    if (!bgmusic) return;
 
-        // 🎵 START MUSIC ON FIRST TICK (mobile-safe)
-        if (!musicStarted) {
-            bgmusic.volume = 0.4;
-            bgmusic.play().catch(() => {});
+    bgmusic.volume = 0.4;
+
+    bgmusic.play()
+        .then(() => {
             musicStarted = true;
-        }
-
-        seconds--;
-        timerEl.textContent = seconds;
-
-        if (seconds <= 0) {
-            clearInterval(countdown);
-            gameOver = true;
-            message.textContent = "Game Over! Score: " + score;
-        }
-
-    }, 1000);
+        })
+        .catch(() => {});
 }
+
+/* unlock audio on first tap */
+document.body.addEventListener("click", () => {
+    startMusic();
+}, { once: true });
+
+/* ---------------- TIMER ---------------- */
+const countdown = setInterval(() => {
+
+    seconds--;
+    timerEl.textContent = seconds;
+
+    if (seconds <= 0) {
+        clearInterval(countdown);
+        gameOver = true;
+        message.textContent = "Game Over! Score: " + score;
+    }
+
+}, 1000);
 
 /* ---------------- MOVE CHARACTER ---------------- */
 setInterval(() => {
@@ -46,19 +56,13 @@ setInterval(() => {
 
     const area = document.getElementById("gameArea").getBoundingClientRect();
 
-    const x = Math.random() * (area.width - 140);
-    const y = Math.random() * (area.height - 140);
+    const x = Math.random() * (area.width - 180);
+    const y = Math.random() * (area.height - 180);
 
     character.style.left = x + "px";
     character.style.top = y + "px";
 
 }, 1000);
-
-/* ---------------- START GAME ON FIRST TAP ---------------- */
-document.body.addEventListener("click", () => {
-
-    startTimer(); // starts timer ONLY once
-}, { once: true });
 
 /* ---------------- MILKSHAKE SELECT ---------------- */
 milkshake.addEventListener("click", () => {
@@ -83,12 +87,12 @@ character.addEventListener("click", () => {
 
     character.src = "images/crying-character.png";
 
-    const rect = character.getBoundingClientRect();
+    const charRect = character.getBoundingClientRect();
     const gameRect = document.getElementById("gameArea").getBoundingClientRect();
 
     splash.style.display = "block";
-    splash.style.left = (rect.left - gameRect.left) + "px";
-    splash.style.top = (rect.top - gameRect.top) + "px";
+    splash.style.left = (charRect.left - gameRect.left) + "px";
+    splash.style.top = (charRect.top - gameRect.top) + "px";
 
     setTimeout(() => {
         character.src = "images/character.png";
