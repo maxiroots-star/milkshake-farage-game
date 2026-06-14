@@ -84,3 +84,10 @@ h1{
 
     text-shadow:2px 2px 4px black;
 }
+#splash{
+    position:absolute;
+    width:150px;
+    display:none;
+    pointer-events:none;
+    z-index:999;
+}
