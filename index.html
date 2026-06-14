@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 🔴 THIS FIXES THE “INNER SCREEN” PROBLEM -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>Milkshake the cunt</title>
+    <title>Milkshake Game</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,12 +12,9 @@
 <body>
 
 <div id="ui">
-
-    <h1>🥤 Milkshake the cunt</h1>
-
+    <h1>🥤 Milkshake Game</h1>
     <div id="timer">30</div>
     <div id="score">Score: 0</div>
-
 </div>
 
 <div id="gameArea">
@@ -33,10 +27,12 @@
 
 <h2 id="message">Tap milkshake then tap character</h2>
 
+<!-- 🎵 MUSIC (MUST BE HERE) -->
+<audio id="bgmusic" loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
+</audio>
+
 <script src="script.js"></script>
 
 </body>
 </html>
-<audio id="bgmusic" loop>
-    <source src="audio/music.mp3" type="audio/mpeg">
-</audio>
