@@ -28,7 +28,7 @@ h1{
 }
 
 #gameArea{
-    width:90vw;
+    width:95vw;
     max-width:700px;
     height:450px;
 
@@ -36,7 +36,7 @@ h1{
     position:relative;
 
     border:3px solid black;
-    border-radius:10px;
+    border-radius:12px;
 
     background-image:url("images/background.jpg");
     background-size:cover;
@@ -49,6 +49,9 @@ h1{
     position:absolute;
     top:120px;
     left:250px;
+
+    user-select:none;
+    -webkit-user-drag:none;
 }
 
 #milkshake{
@@ -56,13 +59,21 @@ h1{
     position:absolute;
     bottom:20px;
     left:20px;
+
     cursor:pointer;
+
+    user-select:none;
+    -webkit-user-drag:none;
+
+    transition:transform 0.2s;
 }
 
 #splash{
     position:absolute;
     width:140px;
+
     display:none;
+
     pointer-events:none;
     z-index:999;
 }
