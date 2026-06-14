@@ -10,7 +10,7 @@ let score = 0;
 let seconds = 30;
 let gameOver = false;
 
-milkshake.draggable = true;
+let milkshakeSelected = false;
 
 /* -------------------------
    MOVE CHARACTER
@@ -48,38 +48,54 @@ const countdown = setInterval(() => {
 }, 1000);
 
 /* -------------------------
-   DRAG START (MILKSHAKE)
+   DESKTOP DRAG (OPTIONAL)
 ------------------------- */
 milkshake.addEventListener("dragstart", (event) => {
-
     if (gameOver) return;
-
     event.dataTransfer.setData("text/plain", "milkshake");
 });
 
-/* -------------------------
-   ALLOW DROP ON CHARACTER
-------------------------- */
 character.addEventListener("dragover", (event) => {
     event.preventDefault();
 });
 
-/* -------------------------
-   DROP HIT
-------------------------- */
 character.addEventListener("drop", (event) => {
-
     event.preventDefault();
+    hit();
+});
+
+/* -------------------------
+   MOBILE TAP SYSTEM
+------------------------- */
+milkshake.addEventListener("click", () => {
 
     if (gameOver) return;
+
+    milkshakeSelected = true;
+    message.textContent = "Now tap the character!";
+});
+
+character.addEventListener("click", () => {
+
+    if (gameOver) return;
+    if (!milkshakeSelected) return;
+
+    milkshakeSelected = false;
+    hit();
+});
+
+/* -------------------------
+   HIT FUNCTION (USED BY BOTH)
+------------------------- */
+function hit() {
 
     score++;
     scoreDisplay.textContent = "Score: " + score;
 
-    /* CRY */
+    // Cry
     character.src = "images/crying-character.png";
 
-    /* SPLASH POSITION (IMPORTANT FIX) */
+    // Splash position (SAFE METHOD)
     const rect = character.getBoundingClientRect();
 
     splash.style.display = "block";
@@ -94,5 +110,4 @@ character.addEventListener("drop", (event) => {
         splash.style.display = "none";
 
     }, 500);
-
-});
+}
