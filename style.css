@@ -54,7 +54,7 @@ h1{
 
 /* CHARACTER */
 #character{
-    width:130px;
+    width:150px;
     position:absolute;
     user-select:none;
     -webkit-user-drag:none;
