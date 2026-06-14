@@ -1,68 +1,60 @@
-/* RESET (IMPORTANT FOR MOBILE) */
 html, body{
     margin:0;
     padding:0;
     width:100%;
     height:100%;
+
     overflow:hidden;
+
     font-family:Arial;
+    background:black;
 }
 
-/* BACKGROUND */
-body{
+/* TOP UI */
+#ui{
+    position:relative;
+    z-index:10;
     text-align:center;
-    background-image:url("images/background.jpg");
-    background-size:cover;
-    background-position:center;
 }
 
-/* TITLE */
 h1{
     color:white;
+    margin:10px 0 0 0;
     text-shadow:2px 2px 4px black;
-    margin:10px 0 5px 0;
 }
 
-/* TIMER */
 #timer{
-    font-size:40px;
+    font-size:38px;
     font-weight:bold;
     color:white;
-    text-shadow:2px 2px 4px black;
 }
 
-/* SCORE */
 #score{
     font-size:26px;
-    font-weight:bold;
     color:white;
-    text-shadow:2px 2px 4px black;
     margin-bottom:5px;
 }
 
-/* GAME AREA (FULL RESPONSIVE FIX) */
+/* GAME AREA (FULL SCREEN FIX) */
 #gameArea{
-    width:100vw;     /* FULL SCREEN WIDTH */
-    height:70vh;     /* TAKE MOST OF SCREEN HEIGHT */
+    position:absolute;
 
-    position:relative;
+    top:120px;   /* pushes below UI */
+    left:0;
 
-    margin:0 auto;
-
-    border:3px solid black;
+    width:100vw;
+    height:calc(100vh - 180px);
 
     background-image:url("images/background.jpg");
     background-size:cover;
     background-position:center;
 
     overflow:hidden;
-
-    touch-action:manipulation;
 }
 
 /* CHARACTER */
 #character{
-    width:140px;
+    width:130px;
     position:absolute;
     user-select:none;
     -webkit-user-drag:none;
@@ -70,17 +62,13 @@ h1{
 
 /* MILKSHAKE */
 #milkshake{
-    width:85px;
+    width:80px;
     position:absolute;
     bottom:15px;
     left:15px;
 
-    cursor:pointer;
-
     user-select:none;
     -webkit-user-drag:none;
-
-    transition:transform 0.2s;
 }
 
 /* SPLASH */
@@ -94,24 +82,13 @@ h1{
 
 /* MESSAGE */
 #message{
-    font-size:20px;
+    position:absolute;
+    bottom:5px;
+    width:100%;
+
+    text-align:center;
+
+    font-size:18px;
     color:white;
     text-shadow:2px 2px 4px black;
-    margin-top:8px;
-}
-
-/* MOBILE TWEAK */
-@media (max-width:600px){
-
-    #character{
-        width:110px;
-    }
-
-    #milkshake{
-        width:70px;
-    }
-
-    #timer{
-        font-size:34px;
-    }
 }
