@@ -1,25 +1,31 @@
-body{
+/* RESET (IMPORTANT FOR MOBILE) */
+html, body{
     margin:0;
     padding:0;
-    text-align:center;
+    width:100%;
+    height:100%;
+    overflow:hidden;
     font-family:Arial;
+}
 
+/* BACKGROUND */
+body{
+    text-align:center;
     background-image:url("images/background.jpg");
     background-size:cover;
     background-position:center;
-    min-height:100vh;
 }
 
 /* TITLE */
 h1{
     color:white;
     text-shadow:2px 2px 4px black;
-    margin-top:10px;
+    margin:10px 0 5px 0;
 }
 
 /* TIMER */
 #timer{
-    font-size:42px;
+    font-size:40px;
     font-weight:bold;
     color:white;
     text-shadow:2px 2px 4px black;
@@ -27,26 +33,23 @@ h1{
 
 /* SCORE */
 #score{
-    font-size:28px;
+    font-size:26px;
     font-weight:bold;
     color:white;
     text-shadow:2px 2px 4px black;
-    margin-bottom:10px;
+    margin-bottom:5px;
 }
 
-/* GAME AREA (FIXED MOBILE LAYOUT) */
+/* GAME AREA (FULL RESPONSIVE FIX) */
 #gameArea{
-    width:95vw;
-    max-width:700px;
-
-    height:60vh;   /* IMPORTANT FIX */
-
-    margin:auto;
+    width:100vw;     /* FULL SCREEN WIDTH */
+    height:70vh;     /* TAKE MOST OF SCREEN HEIGHT */
 
     position:relative;
 
+    margin:0 auto;
+
     border:3px solid black;
-    border-radius:12px;
 
     background-image:url("images/background.jpg");
     background-size:cover;
@@ -54,28 +57,20 @@ h1{
 
     overflow:hidden;
 
-    touch-action:manipulation; /* IMPORTANT for mobile clicks */
+    touch-action:manipulation;
 }
 
 /* CHARACTER */
 #character{
-    width:140px;   /* responsive smaller size */
-
+    width:140px;
     position:absolute;
-
-    top:120px;
-    left:250px;
-
     user-select:none;
     -webkit-user-drag:none;
-
-    touch-action:manipulation;
 }
 
 /* MILKSHAKE */
 #milkshake{
     width:85px;
-
     position:absolute;
     bottom:15px;
     left:15px;
@@ -92,11 +87,8 @@ h1{
 #splash{
     position:absolute;
     width:120px;
-
     display:none;
-
     pointer-events:none;
-
     z-index:999;
 }
 
@@ -105,25 +97,21 @@ h1{
     font-size:20px;
     color:white;
     text-shadow:2px 2px 4px black;
-    margin-top:10px;
+    margin-top:8px;
 }
 
-/* MOBILE TWEAKS */
+/* MOBILE TWEAK */
 @media (max-width:600px){
 
     #character{
-        width:120px;
+        width:110px;
     }
 
     #milkshake{
-        width:75px;
+        width:70px;
     }
 
     #timer{
-        font-size:36px;
-    }
-
-    #score{
-        font-size:24px;
+        font-size:34px;
     }
 }
