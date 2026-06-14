@@ -93,3 +93,5 @@ character.addEventListener("click", () => {
 
     }, 500);
 });
+const bgmusic = document.getElementById("bgmusic");
+let musicStarted = false;
