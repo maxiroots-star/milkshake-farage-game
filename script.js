@@ -2,8 +2,8 @@ const character = document.getElementById("character");
 const milkshake = document.getElementById("milkshake");
 const splash = document.getElementById("splash");
 
-const timer = document.getElementById("timer");
-const scoreDisplay = document.getElementById("score");
+const timerEl = document.getElementById("timer");
+const scoreEl = document.getElementById("score");
 const message = document.getElementById("message");
 
 const bgmusic = document.getElementById("bgmusic");
@@ -15,114 +15,83 @@ let gameOver = false;
 let milkshakeSelected = false;
 let musicStarted = false;
 
-/* -------------------------
-   MOVE CHARACTER (RESPONSIVE)
-------------------------- */
-const moveCharacter = setInterval(() => {
+/* ---------------- TIMER ---------------- */
+function startTimer() {
+
+    const countdown = setInterval(() => {
+
+        // 🎵 START MUSIC ON FIRST TICK (mobile-safe)
+        if (!musicStarted) {
+            bgmusic.volume = 0.4;
+            bgmusic.play().catch(() => {});
+            musicStarted = true;
+        }
+
+        seconds--;
+        timerEl.textContent = seconds;
+
+        if (seconds <= 0) {
+            clearInterval(countdown);
+            gameOver = true;
+            message.textContent = "Game Over! Score: " + score;
+        }
+
+    }, 1000);
+}
+
+/* ---------------- MOVE CHARACTER ---------------- */
+setInterval(() => {
 
     if (gameOver) return;
 
-    const gameArea = document.getElementById("gameArea");
-    const rect = gameArea.getBoundingClientRect();
+    const area = document.getElementById("gameArea").getBoundingClientRect();
 
-    const size = 140; // character size approx
-
-    const x = Math.random() * (rect.width - size);
-    const y = Math.random() * (rect.height - size);
+    const x = Math.random() * (area.width - 140);
+    const y = Math.random() * (area.height - 140);
 
     character.style.left = x + "px";
     character.style.top = y + "px";
 
 }, 1000);
 
-/* -------------------------
-   TIMER + MUSIC START
-------------------------- */
-const countdown = setInterval(() => {
+/* ---------------- START GAME ON FIRST TAP ---------------- */
+document.body.addEventListener("click", () => {
 
-    // START MUSIC ONCE (mobile safe)
-    if (!musicStarted) {
-        bgmusic.volume = 0.4;
-        bgmusic.play().catch(() => {});
-        musicStarted = true;
-    }
+    startTimer(); // starts timer ONLY once
+}, { once: true });
 
-    seconds--;
-    timer.textContent = seconds;
-
-    if (seconds <= 0) {
-
-        gameOver = true;
-
-        clearInterval(countdown);
-        clearInterval(moveCharacter);
-
-        message.textContent = "Game Over! Score: " + score;
-    }
-
-}, 1000);
-
-/* -------------------------
-   MOBILE TAP: SELECT MILKSHAKE
-------------------------- */
+/* ---------------- MILKSHAKE SELECT ---------------- */
 milkshake.addEventListener("click", () => {
 
     if (gameOver) return;
 
     milkshakeSelected = true;
-
     milkshake.style.transform = "scale(1.2)";
-    message.textContent = "Now tap the character!";
+    message.textContent = "Now tap character!";
 });
 
-/* -------------------------
-   HIT CHARACTER
-------------------------- */
+/* ---------------- HIT ---------------- */
 character.addEventListener("click", () => {
 
-    if (gameOver) return;
-    if (!milkshakeSelected) return;
+    if (gameOver || !milkshakeSelected) return;
 
     milkshakeSelected = false;
     milkshake.style.transform = "scale(1)";
 
-    hit();
-});
-
-/* -------------------------
-   HIT FUNCTION (CORE GAME LOGIC)
-------------------------- */
-function hit() {
-
     score++;
-    scoreDisplay.textContent = "Score: " + score;
+    scoreEl.textContent = "Score: " + score;
 
-    // cry image
     character.src = "images/crying-character.png";
 
-    // splash positioning (FIXED)
-    const charRect = character.getBoundingClientRect();
+    const rect = character.getBoundingClientRect();
     const gameRect = document.getElementById("gameArea").getBoundingClientRect();
 
     splash.style.display = "block";
-    splash.style.left = (charRect.left - gameRect.left) + "px";
-    splash.style.top = (charRect.top - gameRect.top) + "px";
-
-    message.textContent = "Nice one!";
+    splash.style.left = (rect.left - gameRect.left) + "px";
+    splash.style.top = (rect.top - gameRect.top) + "px";
 
     setTimeout(() => {
-
         character.src = "images/character.png";
         splash.style.display = "none";
-
     }, 500);
-}
-
-/* -------------------------
-   SAFETY: UNLOCK AUDIO ON MOBILE
-------------------------- */
-document.body.addEventListener("click", () => {
-
-    bgmusic.play().catch(() => {});
-
-}, { once: true });
+});
