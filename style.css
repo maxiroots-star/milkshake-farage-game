@@ -1,41 +1,32 @@
 body{
     text-align:center;
     font-family:Arial;
+    margin:0;
 
     background-image:url("images/background.jpg");
     background-size:cover;
     background-position:center;
     min-height:100vh;
-
-    margin:0;
-    padding:0;
 }
 
-/* TITLE */
 h1{
     color:white;
     text-shadow:2px 2px 4px black;
-    margin-top:10px;
 }
 
-/* TIMER */
 #timer{
     font-size:40px;
     font-weight:bold;
     color:white;
-    text-shadow:2px 2px 4px black;
 }
 
-/* SCORE */
 #score{
     font-size:28px;
     font-weight:bold;
     color:white;
-    text-shadow:2px 2px 4px black;
     margin-bottom:10px;
 }
 
-/* GAME AREA */
 #gameArea{
     width:90vw;
     max-width:700px;
@@ -45,59 +36,39 @@ h1{
     position:relative;
 
     border:3px solid black;
-    border-radius:12px;
+    border-radius:10px;
 
     background-image:url("images/background.jpg");
     background-size:cover;
-    background-position:center;
 
     overflow:hidden;
 }
 
-/* CHARACTER */
 #character{
     width:160px;
-
     position:absolute;
     top:120px;
     left:250px;
-
-    user-select:none;
-    -webkit-user-drag:none;
 }
 
-/* MILKSHAKE */
 #milkshake{
     width:90px;
-
     position:absolute;
     bottom:20px;
     left:20px;
-
     cursor:pointer;
-
-    user-select:none;
-    -webkit-user-drag:none;
-
-    transition:transform 0.2s;
 }
 
-/* MESSAGE */
+#splash{
+    position:absolute;
+    width:140px;
+    display:none;
+    pointer-events:none;
+    z-index:999;
+}
+
 #message{
     font-size:22px;
     color:white;
     text-shadow:2px 2px 4px black;
-
-    margin-top:15px;
-}
-
-/* SPLASH */
-#splash{
-    position:absolute;
-    width:140px;
-
-    display:none;
-
-    pointer-events:none;
-    z-index:999;
 }
