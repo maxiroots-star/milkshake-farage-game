@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 🔴 THIS FIXES THE “INNER SCREEN” PROBLEM -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Milkshake Game</title>
 
@@ -11,22 +14,24 @@
 
 <body>
 
-<h1>🥤 Milkshake Game</h1>
+<div id="ui">
 
-<div id="timer">30</div>
-<div id="score">Score: 0</div>
+    <h1>🥤 Milkshake Game</h1>
+
+    <div id="timer">30</div>
+    <div id="score">Score: 0</div>
+
+</div>
 
 <div id="gameArea">
 
     <img id="character" src="images/character.png">
-
     <img id="milkshake" src="images/milkshake.png">
-
     <img id="splash" src="images/splash.png">
 
 </div>
 
-<h2 id="message">Tap milkshake, then tap character!</h2>
+<h2 id="message">Tap milkshake then tap character</h2>
 
 <script src="script.js"></script>
 
